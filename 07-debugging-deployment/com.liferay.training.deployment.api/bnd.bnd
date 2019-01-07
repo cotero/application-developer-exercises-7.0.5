@@ -1,0 +1,8 @@
+-buildpath: \
+	osgi.annotation,\
+	osgi.cmpn,\
+	osgi.core
+	
+	
+Bundle-Version: 0.0.0.${tstamp}
+Export-Package: com.liferay.training.deployment.api

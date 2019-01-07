@@ -1,0 +1,20 @@
+-buildpath: \
+	osgi.annotation;version=6.0.1,\
+	osgi.core;version=6.0,\
+	osgi.cmpn;version=6.0
+
+-testpath: \
+	junit; version=4,\
+	hamcrest-core; version=1.3
+
+Bundle-Version: 1.0.0.${tstamp}
+Private-Package: com.liferay.training.hello.portlet
+-dsannotations: *
+
+-jsp: *.jsp, *.jspf
+-plugin.jsp: com.liferay.ant.bnd.jsp.JspAnalyzerPlugin
+
+Import-Package: *
+
+Require-Capability:\
+ osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=http://java.sun.com/portlet_2_0))"

@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: App-dev-snippets
+Bundle-SymbolicName: app-dev-snippets;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.liferay.training.appdev.snippets.AppDevSnippetsPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.liferay.ide.ui.snippets;bundle-version="2.0.0",
+ org.eclipse.wst.common.snippets,
+ com.liferay.ide.core;bundle-version="2.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,115 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * <p>
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ * <p>
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.training.space.gradebook.service.impl;
+
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.training.space.gradebook.model.Assignment;
+import com.liferay.training.space.gradebook.service.base.AssignmentServiceBaseImpl;
+import com.liferay.training.space.gradebook.service.permission.AssignmentPermission;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+/**
+ * The implementation of the assignment remote service.
+ *
+ * <p>
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.training.space.gradebook.service.AssignmentService} interface.
+ *
+ * <p>
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AssignmentServiceBaseImpl
+ * @see com.liferay.training.space.gradebook.service.AssignmentServiceUtil
+ */
+@ProviderType
+public class AssignmentServiceImpl extends AssignmentServiceBaseImpl {
+
+	public Assignment addAssignment(
+			final Map<Locale, String> title, final String description,
+			final Date dueDate, final ServiceContext serviceContext)
+		throws PortalException {
+
+		AssignmentPermission.checkTopLevel(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			AssignmentPermission.ADD_ASSIGNMENT);
+
+		return assignmentLocalService.addAssignment(
+			title, description, dueDate, serviceContext);
+	}
+
+	public Assignment deleteAssignment(Assignment assignment)
+		throws PortalException {
+
+		AssignmentPermission.check(
+			getPermissionChecker(), assignment.getGroupId(),
+			assignment.getAssignmentId(), ActionKeys.DELETE);
+
+		return assignmentLocalService.deleteAssignment(assignment);
+	}
+
+	public Assignment deleteAssignment(long assignmentId)
+		throws PortalException {
+
+		Assignment assignment = assignmentLocalService.getAssignment(
+			assignmentId);
+
+		return assignmentLocalService.deleteAssignment(assignment);
+	}
+
+	public Assignment getAssignment(long assignmentId) throws PortalException {
+		Assignment assignment = assignmentLocalService.getAssignment(
+			assignmentId);
+
+		AssignmentPermission.check(
+			getPermissionChecker(), assignment.getGroupId(),
+			assignment.getAssignmentId(), ActionKeys.VIEW);
+
+		return assignment;
+	}
+
+	public List<Assignment> getAssignmentsByGroupId(long groupId) {
+		return assignmentPersistence.filterFindByGroupId(groupId);
+	}
+
+	public List<Assignment> getAssignmentsByGroupId(
+		long groupId, int start, int end) {
+
+		return assignmentPersistence.filterFindByGroupId(groupId, start, end);
+	}
+
+	public int getAssignmentsCountByGroupId(long groupId) {
+		return assignmentPersistence.filterCountByGroupId(groupId);
+	}
+
+	public Assignment updateAssignment(Assignment assignment)
+		throws PortalException {
+
+		AssignmentPermission.check(
+			getPermissionChecker(), assignment.getGroupId(),
+			assignment.getAssignmentId(), ActionKeys.UPDATE);
+
+		return assignmentLocalService.updateAssignment(assignment);
+	}
+
+}

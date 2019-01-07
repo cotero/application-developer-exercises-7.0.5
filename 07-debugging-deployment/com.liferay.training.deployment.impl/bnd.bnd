@@ -1,0 +1,7 @@
+Bundle-Version: 0.0.0.${tstamp}
+Private-Package: com.liferay.training.deployment.impl
+-buildpath: \
+	osgi.annotation,\
+	osgi.cmpn,\
+	osgi.core,\
+	com.liferay.training.deployment.api;version=latest

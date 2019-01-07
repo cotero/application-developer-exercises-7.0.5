@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Lifecycle Demo
+Bundle-SymbolicName: com.liferay.training.lifecycle.command
+Bundle-Version: 1.0.0
+Bundle-Activator: com.liferay.training.lifecycle.command.DemoActivator
+Bundle-Vendor: LIFERAY.COM
+Require-Bundle: org.eclipse.osgi
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
